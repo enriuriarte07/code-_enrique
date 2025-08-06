@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUD - Tareas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+<header class="bg-indigo-800 text-white py-6 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+    <h1 class="text-3xl font-bold mb-4 md:mb-0">Agenda Virtual </h1>
+    <nav>
+      <ul class="flex gap-6 text-sm md:text-base">
+        <li><a href="#" class="hover:underline">INICIO</a></li>
+        <li><a href="#agregar" class="hover:underline">AGREGAR TAREA</a></li>
+        <li><a href="#" class="hover:underline">MIS TAREAS</a></li>
+        <li><a href="#" class="hover:underline">AYUDA</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="flex justify-center mt-6 mb-16">
+  <img class="w-4/5 rounded shadow-md" src="crud.png" alt="imagen crud" />
+</div>
+
+<section id="agregar" class="max-w-3xl mx-auto bg-white p-6 mt-8 rounded shadow">
+  <h2 class="text-xl font-semibold ">Gestión de Tareas</h2>
+  <form id="form-tarea" method="POST" action="/tarea" class="space-y-4">
+    <input type="hidden" name="id" value="" />
+    
+
+    <div>
+      <label for="titulo" class="block font-medium">Título:</label>
+      <input type="text" id="titulo" name="titulo" required value=""
+        class="w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+    <div class="alert bg-red-100 text-red-700 p-2 rounded">
+  Debes llenar todos los campos.
+</div>
+
+
+    <div>
+      <label for="descripcion" class="block font-medium">Descripción:</label>
+      <textarea id="descripcion" name="descripcion"
+        class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+    </div>
+<div class="alert bg-red-100 text-red-700 p-2 rounded">
+  Debes llenar todos los campos.
+</div>
+
+    <div>
+      <label for="prioridad" class="block font-medium">Prioridad:</label>
+      <select id="prioridad" name="prioridad" class="w-full border border-gray-300 rounded px-3 py-2">
+        <option value="">Seleccionar prioridad</option>
+        <option value="alta">Alta</option>
+        <option value="media">Media</option>
+        <option value="baja">Baja</option>
+      </select>
+    </div>
+
+    <div class="flex gap-4">
+      <div class="w-1/2">
+        <label for="fecha-inicio" class="block font-medium">Fecha de inicio:</label>
+        <input type="date" id="fecha-inicio" name="fecha_inicio" value=""
+          class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+
+      <div class="w-1/2">
+        <label for="fecha-limite" class="block font-medium">Fecha límite:</label>
+        <input type="date" id="fecha-limite" name="fecha_limite" value=""
+          class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+    </div>
+
+    <div>
+      <label for="estado" class="block font-medium">Estado:</label>
+      <select id="estado" name="estado" class="w-full border border-gray-300 rounded px-3 py-2">
+        <option value="">Seleccionar estado</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="en_proceso">En proceso</option>
+        <option value="completada">Completada</option>
+      </select>
+    </div>
+    <button class="...">
+  <i class="fa-solid fa-plus"></i> Completar campo
+</button>
+
+
+    <div class="flex gap-4">
+      <button type="submit" name="accion" value="agregar"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Agregar</button>
+    </div>
+  </form>
+</section>
+
+<section class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Lista de tareas</h2>
+  <div id="lista-tareas" class="space-y-4">
+
+    <div class="border border-gray-200 rounded p-4 bg-gray-50">
+      <div class="flex justify-between items-start mb-2">
+        <h3 class="text-lg font-semibold text-indigo-700">Título de ejemplo</h3>
+        <div class="flex gap-2">
+            
+          <form method="POST" action="/tarea" class="inline">
+            <input type="hidden" name="id" value="1">
+            <button type="submit" name="accion" value="editar"
+              class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+              Editar
+              
+            </button>
+          </form>
+          <form method="POST" action="/tarea" class="inline">
+            <input type="hidden" name="id" value="1">
+            <button type="submit" name="accion" value="eliminar"
+              onclick="return confirm('¿Estás seguro de eliminar esta tarea?')"
+              class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+              Eliminar
+            </button>
+
+            
+          </form>
+        </div>
+        
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
+        <p><strong>Descripción:</strong> Texto de ejemplo</p>
+        <p><strong>Prioridad:</strong> Alta</p>
+        <p><strong>Fecha Inicio:</strong> 2025-08-01</p>
+        <p><strong>Fecha Límite:</strong> 2025-08-10</p>
+        <p><strong>Estado:</strong> Pendiente</p>
+      </div>
+    </div>
+
+    <p class="text-gray-500">No hay tareas para mostrar.</p>
+
+  </div>
+</section>
+
+<footer class="bg-indigo-900 text-white mt-10 py-6 text-center">
+  <p>© 2025 Taller CRUD</p>
+  <nav class="mt-2">
+    <ul class="flex justify-center gap-6 text-sm">
+      <li><a href="#" class="hover:underline">Política de Privacidad</a></li>
+      <li><a href="#" class="hover:underline">Términos</a></li>
+      <li><a href="#" class="hover:underline">Contacto</a></li>
+    </ul>
+  </nav>
+</footer>
+
+</body>
+</html>
+
+
